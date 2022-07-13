@@ -3,7 +3,7 @@ import { ShoppingHistory } from '../models/shopping_history.js';
 import { Warehouse } from '../models/warehouse.js';
 
 export const market = async (req, res) => {
-  const ingredients = req.body; // un objeto con los ingredientes y cantidades necesarios para la receta
+  const ingredients = req.body; // un objeto con los ingredientes y cantidades necesarios para la receta 
   let ingredientsNeeded = await checkInventory(ingredients); // devuelve false si no necesito ingredientes, sino devuelve un objeto con los ingredientes necesarios
   let ingredientRequested;
   let ingredientsToAdd = {}
