@@ -50,10 +50,7 @@ async function addToInventory(ingredients) { // recibe los ingredientes comprado
   for(const i in ingredients) {
     warehouse.ingredients[i]+= ingredients[i]
   }
-  /*const ingredients_array = Object.keys(ingredients);
-  for(let i = 0; i < ingredients_array.length; i++) {
-    warehouse.ingredients[ingredients_array[i]]+= ingredients[ingredients_array[i]]
-  }*/
+  
   await warehouse.save();
 }
 
@@ -107,44 +104,3 @@ export async function deleteShoppingHistory(req, res) {
   await ShoppingHistory.deleteMany();
   res.json({mensaje: 'deleted'})
 }
-
-/*
-for (const i in ingredientsNeeded) {
-      do { // hago la peticion de ingredientes a la api hasta tener los necesarios
-        ingredientRequested = await axios.get(`https://recruitment.alegra.com/api/farmers-market/buy?ingredient=${i}`);
-        if(ingredientRequested.data.quantitySold !== 0) {
-          count+= ingredientRequested.data.quantitySold;
-          await addToShoppingHistory(i, ingredientRequested.data.quantitySold); // cuando obtengo un ingrediente de la api lo agrego al historial de compras
-        } 
-      } while(count < ingredientsNeeded[i]);
-      ingredientsToAdd[i] = count;
-      count = 0; // count en 0 para seguir con el siguiente ingrediente
-    }
-*/ 
-
-/*
-for(let i = 0; i < ingredients_array.length; i++) {
-
-      do { // hago la peticion de ingredientes a la api hasta tener los necesarios
-
-        ingredientRequested = await axios.get(`https://recruitment.alegra.com/api/farmers-market/buy?ingredient=${ingredients_array[i]}`);
-        
-        if(ingredientRequested.data.quantitySold !== 0) {
-          count+= ingredientRequested.data.quantitySold;
-          await addToShoppingHistory(ingredients_array[i], ingredientRequested.data.quantitySold); // cuando obtengo un ingrediente de la api lo agrego al historial de compras
-        } 
-      } while(count < ingredientsNeeded[ingredients_array[i]]);
-      ingredientsToAdd[ingredients_array[i]] = count;
-      count = 0; // count en 0 para seguir con el siguiente ingrediente
-    } */
-
-/*
-  const ingredients_array = Object.keys(kitchenIngredients);
-  for(let i = 0; i < ingredients_array.length; i++) {
-    if(warehouse.ingredients[ingredients_array[i]] < kitchenIngredients[ingredients_array[i]]) {
-
-      count = kitchenIngredients[ingredients_array[i]] - warehouse.ingredients[ingredients_array[i]]
-      ingredientsNeeded[ingredients_array[i]] = count;
-    }
-  
-  }*/
