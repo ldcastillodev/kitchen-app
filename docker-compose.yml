@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  kitchen:
+    container_name: kitchen
+    build:
+      context: ./api/kitchen
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '4000:4000'
+    networks:
+      - mern-app
+      
+  warehouse:
+    container_name: warehouse
+    build:
+      context: ./api/warehouse
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '8080:8080'
+    networks:
+      - mern-app
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '3000:3000'
+    networks:
+        - mern-app
+
+networks:
+  mern-app:
+   driver: bridge
