@@ -1,8 +1,6 @@
-# Alegra-App
+# Kitchen-App
 
 ## To initialize app:
-
-### `cd /alegra-app`.
 
 ### `docker-compose up --build`
 
