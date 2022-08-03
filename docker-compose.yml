@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+
+  kitchen_db:
+    container_name: kitchen_db_container
+    image: mongo:latest
+    restart: always
+    networks:
+        - mern-app
+
   kitchen:
     container_name: kitchen
     build:
@@ -10,7 +18,19 @@ services:
       - '4000:4000'
     networks:
       - mern-app
-      
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://kitchen_db_container:27017
+    depends_on:
+      - kitchen_db
+
+  warehouse_db:
+    container_name: warehouse_db_container
+    image: mongo:latest
+    restart: always
+    networks:
+        - mern-app
+
   warehouse:
     container_name: warehouse
     build:
@@ -21,6 +41,11 @@ services:
       - '8080:8080'
     networks:
       - mern-app
+    environment:
+      PORT: 8080
+      MONGODB_URI: mongodb://warehouse_db_container:27017
+    depends_on:
+      - warehouse_db
 
   frontend:
     container_name: frontend
